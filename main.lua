@@ -74,7 +74,7 @@ function love.draw()
     -- ubuntu bold italic, 48px, top left of window with reasonable margin, "packstorm"
     love.graphics.setFont(love.graphics.newFont("fonts/ubuntu-bolditalic.ttf", 64))
     love.graphics.print("packstorm", 8, 1)
-    -- ubuntu mono, small but readable, just under the title, build number from the file build_number
+    -- ubuntu mono, small but readable, just under the title, "by hailey#0048"
     love.graphics.setFont(love.graphics.newFont("fonts/ubuntumono-regular.ttf", 16))
-    love.graphics.print("commit " .. build_number, 8, 64)
+    love.graphics.print("by hailey#0048", 8, 72)
 end
