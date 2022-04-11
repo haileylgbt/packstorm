@@ -1,7 +1,5 @@
 -- load the config variables from hconf.lua
 hconf = require "hconf"
-
-commit = require "build_number"
 -- styles are a table of words and flows that replicate the style of a certain packer
 -- each style is stored in a .pss file in the styles folder
 -- NOTE: .pss files are just lua files in disguise, so you can use lua syntax
