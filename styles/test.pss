@@ -1,0 +1,29 @@
+-- styles are made up of special words and flows
+
+style = {
+    name = "style name",
+    author = "author name",
+    description = "hey look a style",
+    words = {
+        -- no plurals unless its a proper noun
+        nouns = [
+            "apple",
+            "banana"
+        ],
+        adjectives = [
+            "smelly",
+            "fruity"
+        ],
+        -- always use future tense!
+        verbs = [
+            "eat",
+            "drink",
+            "jump",
+            "run"
+        ]
+    },
+    flows = [
+        "You look like a [adjective] [noun].",
+        ""
+    ]
+}
