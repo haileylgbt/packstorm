@@ -1,5 +1,7 @@
 -- load the config variables from hconf.lua
 hconf = require "hconf"
+
+commit = require "build_number"
 -- styles are a table of words and flows that replicate the style of a certain packer
 -- each style is stored in a .pss file in the styles folder
 -- NOTE: .pss files are just lua files in disguise, so you can use lua syntax
@@ -74,5 +76,7 @@ function love.draw()
     -- ubuntu bold italic, 48px, top left of window with reasonable margin, "packstorm"
     love.graphics.setFont(love.graphics.newFont("fonts/ubuntu-bolditalic.ttf", 64))
     love.graphics.print("packstorm", 8, 1)
-    -- ubuntu mono, small but readable, just under the title, version number
+    -- ubuntu mono, small but readable, just under the title, build number from the file build_number
+    love.graphics.setFont(love.graphics.newFont("fonts/ubuntumono-regular.ttf", 16))
+    love.graphics.print("commit " .. build_number, 8, 64)
 end
