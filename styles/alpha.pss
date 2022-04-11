@@ -1,9 +1,9 @@
 -- styles are made up of special words and flows
 
-local test = {
-    name = "test style",
+local alpha = {
+    name = "alpha style",
     author = "hailey#0048",
-    description = "the first style ever made. used for testing. not practical for real use.",
+    description = "the first style ever made. used for alphaing. not practical for real use.",
     words = {
         -- no plurals unless its a proper noun
         nouns = {
@@ -28,4 +28,4 @@ local test = {
     }
 }
 
-return test
+return alpha

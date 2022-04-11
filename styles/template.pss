@@ -1,29 +1,31 @@
 -- styles are made up of special words and flows
 
-style = {
+local template = {
     name = "style name",
     author = "author name",
     description = "hey look a style",
     words = {
         -- no plurals unless its a proper noun
-        nouns = [
+        nouns = {
             "apple",
             "banana"
-        ],
-        adjectives = [
+        },
+        adjectives = {
             "smelly",
             "fruity"
-        ],
+        },
         -- always use future tense!
-        verbs = [
+        verbs = {
             "eat",
             "drink",
             "jump",
             "run"
-        ]
+        }
     },
-    flows = [
+    flows = {
         "You look like a [adjective] [noun].",
-        ""
-    ]
+        "Tell me why I saw you [verb]ing a [noun] at 3AM."
+    }
 }
+
+return template
