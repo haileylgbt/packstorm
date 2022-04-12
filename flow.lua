@@ -11,6 +11,8 @@ local flow = {
     -- t needs to be a string and include at least 1 replaceable word
     -- w needs to be a table of words that include a nouns, adjectives, and verbs table
     -- if the replaeable word is a verb ending with an e that's immediately followed by "ing", it will be replaced with the verb in the past tense
+    -- words surrounded by curly braces are special and are affected by certain conditions
+    -- example: {a/n} will either be "a" or "an" depending on if the next letter is a vowel or not
     parseFlow = function(t, w)
         local r = t
         local n = w.nouns
@@ -25,6 +27,7 @@ local flow = {
         r = string.gsub(r, "%[noun%]", n[rn])
         r = string.gsub(r, "%[adjective%]", a[ra])
         r = string.gsub(r, "%[verb%]", v[rv])
+        r = string.gsub(r, "%{a/n%}", string.sub(n[rn], 1, 1) == "a" and "an" or "a")
         return r
     end
 

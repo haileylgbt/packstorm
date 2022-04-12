@@ -1,0 +1,18 @@
+local template = {
+    name = "template",
+    curator = "you",
+    description = "an empty template pool",
+    words = {
+        nouns = {
+
+        },
+        adjectives = {
+
+        },
+        verbs = {
+
+        }
+    }
+}
+
+return template

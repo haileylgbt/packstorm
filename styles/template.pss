@@ -1,0 +1,24 @@
+local template = {
+    name = "style name",
+    author = "you",
+    description = "describe your style here!",
+    words = {
+        -- no plurals unless its a proper noun
+        nouns = {
+
+        },
+        adjectives = {
+            
+        },
+        -- always use future tense!
+        verbs = {
+
+        }
+    },
+    flows = {
+        "You look like {a/n} [adjective] [noun].",
+        "Tell me why I saw you [verb]ing {a/n} [noun] at 3AM."
+    }
+}
+
+return template

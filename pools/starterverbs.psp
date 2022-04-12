@@ -1,0 +1,29 @@
+local starterverbs = {
+    name = "starter verbs",
+    curator = "hailey#0048",
+    description = "a small pool of verbs to start you off!",
+    words = {
+        nouns = {},
+        adjectives = {},
+        verbs = {
+            "eat",
+            "drink",
+            "jump",
+            "run",
+            "swim",
+            "fly",
+            "sleep",
+            "play",
+            "read",
+            "write",
+            "draw",
+            "build",
+            "make",
+            "break",
+            "destroy",
+            "kill"
+        }
+    }
+}
+
+return starterverbs

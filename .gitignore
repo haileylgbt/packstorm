@@ -1,4 +1,2 @@
-pools/
-!pools/template.psp
-styles/
+styles/*
 !styles/template.pss

@@ -1,0 +1,33 @@
+local coloradjs = {
+    name = "color adjectives",
+    curator = "hailey#0048",
+    description = "a style for color adjectives",
+    words = {
+        -- no plurals unless its a proper noun
+        nouns = {
+
+        },
+        adjectives = {
+            "red",
+            "orange",
+            "yellow",
+            "green",
+            "blue",
+            "indigo",
+            "violet",
+            "white",
+            "black",
+            "gray",
+            "brown",
+            "pink",
+            "purple",
+            "magenta",
+            "crimson",
+        },
+        -- always use future tense!
+        verbs = {
+        }
+    }
+}
+
+return coloradjs
