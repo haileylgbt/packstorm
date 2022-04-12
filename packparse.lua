@@ -1,10 +1,15 @@
+-- PACKPARSE
+-- Copyright (c) 2022, cudsys studios
+-- All rights reserved.
+-- shoutouts to tracery
+
 -- a flow is a template that is filled with randomly picked words from the pools
 -- flows are processed much like a simplistic version of Tracery
 -- example: "You look like a [adjective] [noun]." becomes "You look like a fruity banana."
 -- the parser also supports verb tenses.
 -- example: "I was [verb]ing away." becomes "I was running away."
 
-local flow = {
+local packparse = {
 
     -- parseFlow takes a string (t) and a table of words (w) as input
     -- it then returns a processed string with the words replaced
@@ -38,7 +43,7 @@ local flow = {
 
 }   
 
-return flow
+return packparse
 
 
     --[[ parseFlow = function(t, w)
