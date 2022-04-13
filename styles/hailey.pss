@@ -16,7 +16,8 @@ local hailey = {
         }
     },
     flows = {
-        "You look like a [noun]."
+        "You look like a [noun].",
+        "How'd you get away with being a [adjective] [noun] like god damn."
     }
 }
 
