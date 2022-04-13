@@ -16,8 +16,7 @@ local template = {
         }
     },
     flows = {
-        "You look like {a/n} [adjective] [noun].",
-        "Tell me why I saw you [verb]ing {a/n} [noun] at 3AM."
+        
     }
 }
 

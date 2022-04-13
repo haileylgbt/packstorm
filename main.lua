@@ -1,6 +1,10 @@
 -- CUSTOM FILES:
 -- .psp - packstorm pool: words only
 -- .pss - packstorm style: words and flows
+love.filesystem.setIdentity("packstorm")
+
+love.filesystem.createDirectory("styles/")
+love.filesystem.createDirectory("pools/")
 
 -- load the config variables from hconf.lua
 hconf = require "hconf"
@@ -31,6 +35,17 @@ end
 
 ui_ready = false
 function love.load()
+    -- load the fonts
+    text = {
+        debug = love.graphics.newFont("fonts/UbuntuMono-Regular.ttf", 16),
+        regular_small = love.graphics.newFont("fonts/Ubuntu-Regular.ttf", 16),
+        regular = love.graphics.newFont("fonts/Ubuntu-Regular.ttf", 18),
+        regular_big = love.graphics.newFont("fonts/Ubuntu-Regular.ttf", 20),
+        title = love.graphics.newFont("fonts/Ubuntu-BoldItalic.ttf", 64),
+        loading = love.graphics.newFont("fonts/Ubuntu-Bold.ttf", 48),
+        joke = love.graphics.newFont("fonts/Ubuntu-Regular.ttf", 24),
+        header = love.graphics.newFont("fonts/ubuntu-bold.ttf", 32)
+    }
     -- info about the loading progress will be printed to the console
     -- this is useful for debugging
     print("LOVE started successfully! Using version", love.getVersion())
@@ -208,7 +223,8 @@ function love.keypressed(key, scancode, isrepeat)
     -- when space is pressed, get a random flow from the current style, parse it and set the joke variable to the result
     if key == "space" and current_style then
         local flow = current_style.flows[math.random(#current_style.flows)]
-        local parsed_flow = flows.parseFlow(flow, words)
+        local replaced_flow = flows.parseWords(flow, words)
+        local parsed_flow = flows.parseSpecial(replaced_flow)
         joke = parsed_flow
         print(joke)
     end
@@ -253,24 +269,24 @@ function love.draw()
    if not ui_ready then
         love.graphics.setColor(255, 255, 255)
         -- ubuntu bold, 48, centered, middle of the screen, "loading..."
-        love.graphics.setFont(love.graphics.newFont("fonts/ubuntu-bold.ttf", 48))
+        love.graphics.setFont(text.loading)
         love.graphics.printf("loading!", 0, love.graphics.getHeight() / 2 - 50, love.graphics.getWidth(), "center")
         -- ubuntu regular, 16, centered, below the loading message
-        love.graphics.setFont(love.graphics.newFont("fonts/ubuntu-regular.ttf", 18))
+        love.graphics.setFont(text.regular)
         love.graphics.printf("we're loading the styles and organizing the menu. if this is still hear after one second then your computer is reeeeally slow or a hidden error occured.", 0, love.graphics.getHeight() / 2 + 16, love.graphics.getWidth(), "center")
    else
         -- set color to white
         love.graphics.setColor(255, 255, 255)
         -- ubuntu bold italic, 48px, top left of window with reasonable margin, "packstorm"
-        love.graphics.setFont(love.graphics.newFont("fonts/ubuntu-bolditalic.ttf", 64))
+        love.graphics.setFont(text.title)
         love.graphics.print("packstorm", 8, 1)
         -- ubuntu mono, small but readable, just under the title, "by hailey#0048"
-        love.graphics.setFont(love.graphics.newFont("fonts/ubuntumono-regular.ttf", 16))
+        love.graphics.setFont(text.debug)
         love.graphics.print("by hailey#0048", 8, 72)
 
         -- draw the number of styles, total words, nouns, verbs, and adjectives in the top right corner
         -- example: "styles: 1,  words: 1, nouns: 1, verbs: 1, adjectives: 1"
-        love.graphics.setFont(love.graphics.newFont("fonts/ubuntu-regular.ttf", 16))
+        love.graphics.setFont(text.regular_small)
         love.graphics.print("words: " .. #words.nouns + #words.verbs + #words.adjectives, love.graphics.getWidth() - 128, 24)
         love.graphics.print("nouns: " .. #words.nouns, love.graphics.getWidth() - 128, 40)
         love.graphics.print("verbs: " .. #words.verbs, love.graphics.getWidth() - 128, 56)
@@ -281,15 +297,14 @@ function love.draw()
         love.graphics.setColor(255, 255, 255)
 
         -- draw the generated pack
-        love.graphics.setFont(love.graphics.newFont("fonts/ubuntu-regular.ttf", 28))
-        love.graphics.print(joke, 8, love.graphics.getHeight() - 0 - 128 + 8)
+        love.graphics.setFont(text.joke)
+        love.graphics.print(joke, 16, love.graphics.getHeight() - 0 - 128 + 8)
 
         -- styles header
         -- ubuntu bold, 32px, above the styles list, "styles"
-        love.graphics.setFont(love.graphics.newFont("fonts/ubuntu-bold.ttf", 32))
+        love.graphics.setFont(text.header)
         love.graphics.print("styles", 8, 104)
-        -- set font to ubuntu regular 32px
-        love.graphics.setFont(love.graphics.newFont("fonts/ubuntu-regular.ttf", 20))
+        love.graphics.setFont(text.regular_big)
         -- draw the styles list
         -- every button has a grey filled background and white text
         -- when the mouse is over a button, add a white border
@@ -339,7 +354,7 @@ function love.draw()
     -- if the user presses f3, toggle the debug overlay in the bottom left 
     if hconf.debug then
         -- ubuntu mono, 16px
-        love.graphics.setFont(love.graphics.newFont("fonts/UbuntuMono-Regular.ttf", 16))
+        love.graphics.setFont(text.debug)
         love.graphics.setColor(0, 255, 255)
         love.graphics.print("debug! :D", 400, 0)
         love.graphics.print("fps: " .. love.timer.getFPS(), 400, 16)
