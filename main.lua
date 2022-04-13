@@ -223,8 +223,7 @@ function love.keypressed(key, scancode, isrepeat)
     -- when space is pressed, get a random flow from the current style, parse it and set the joke variable to the result
     if key == "space" and current_style then
         local flow = current_style.flows[math.random(#current_style.flows)]
-        local replaced_flow = flows.parseWords(flow, words)
-        local parsed_flow = flows.parseSpecial(replaced_flow)
+        local parsed_flow = flows.parseWords(flow, words)
         joke = parsed_flow
         print(joke)
     end

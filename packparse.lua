@@ -10,7 +10,6 @@
 -- example: "I was [verb]ing away." becomes "I was running away."
 
 local packparse = {
-
     -- parseFlow takes a string (t) and a table of words (w) as input
     -- it then returns a processed string with the words replaced
     -- t needs to be a string and include at least 1 replaceable word
@@ -30,25 +29,6 @@ local packparse = {
         r = string.gsub(r, "%[adjective%]", a[ra])
         r = string.gsub(r, "%[verb%]", v[rv])
         return r
-    end,
-
-    -- parseSpecial takes a string (t) as input
-    -- it then returns a string with the special tags replaced
-    -- t needs to be a string and include at least 1 replaceable word
-    -- special tags:
-    -- {a/n} - is replaced with "a" or "an" depending on the next word
-    parseSpecial = function(t)
-        local r = t
-        -- {a/n} - if the next word starts with a vowel, replace with "an"
-        --       - if the next word starts with a consonant, replace with "a"
-        -- locate the special tag
-        local s = string.find(r, "%{a/n%}")
-        -- keep track of the position of the special tag
-        local s_pos = s
-        -- look at the next letter after the special tag
-        local s_next = string.sub(r, s + 1, s + 1)
-        -- if the next letter is a, e, i, o,
-        return r 
     end
     
 

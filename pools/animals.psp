@@ -1,0 +1,39 @@
+local animals = {
+    name = "animals",
+    curator = "hailey#0048",
+    description = "goofy ahh animals",
+    words = {
+        nouns = {
+            "cat",
+            "dog",
+            "bird",
+            "fish",
+            "cow",
+            "pig",
+            "sheep",
+            "horse",
+            "donkey",
+            "goat",
+            "panda",
+            "penguin",
+            "turtle",
+            "snake",
+            "lizard",
+            "frog",
+            "hamster",
+            "rabbit",
+            "panda",
+            "penguin",
+            "turtle",
+            "snake"
+        },
+        adjectives = {
+
+        },
+        verbs = {
+
+        }
+    }
+}
+
+return animals

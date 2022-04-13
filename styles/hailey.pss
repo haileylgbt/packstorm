@@ -1,0 +1,23 @@
+local hailey = {
+    name = "hailey",
+    author = "hailey#0048",
+    description = "a starter style with some flows",
+    words = {
+        -- no plurals unless its a proper noun
+        nouns = {
+
+        },
+        adjectives = {
+            
+        },
+        -- always use future tense!
+        verbs = {
+
+        }
+    },
+    flows = {
+        "You look like a [noun]."
+    }
+}
+
+return hailey
