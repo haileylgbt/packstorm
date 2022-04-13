@@ -28,6 +28,8 @@ local packparse = {
         r = string.gsub(r, "%[noun%]", n[rn])
         r = string.gsub(r, "%[adjective%]", a[ra])
         r = string.gsub(r, "%[verb%]", v[rv])
+        -- replace {nword} with "neighbour"
+        r = string.gsub(r, "%{nword%}", "nigga")
         return r
     end
     

@@ -44,7 +44,7 @@ function love.load()
         title = love.graphics.newFont("fonts/Ubuntu-BoldItalic.ttf", 64),
         loading = love.graphics.newFont("fonts/Ubuntu-Bold.ttf", 48),
         joke = love.graphics.newFont("fonts/Ubuntu-Regular.ttf", 24),
-        header = love.graphics.newFont("fonts/ubuntu-bold.ttf", 32)
+        header = love.graphics.newFont("fonts/Ubuntu-Bold.ttf", 32)
     }
     -- info about the loading progress will be printed to the console
     -- this is useful for debugging
@@ -297,7 +297,7 @@ function love.draw()
 
         -- draw the generated pack
         love.graphics.setFont(text.joke)
-        love.graphics.print(joke, 16, love.graphics.getHeight() - 0 - 128 + 8)
+        love.graphics.printf(joke, 16, love.graphics.getHeight() - 0 - 128 + 8, love.graphics.getWidth() - 32, "left")
 
         -- styles header
         -- ubuntu bold, 32px, above the styles list, "styles"
