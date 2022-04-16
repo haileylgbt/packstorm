@@ -1,10 +1,14 @@
+math.randomseed(os.time())
 -- CUSTOM FILES:
 -- .psp - packstorm pool: words only
 -- .pss - packstorm style: words and flows
-love.filesystem.setIdentity("packstorm")
 
+love.filesystem.setIdentity("packstorm")
+-- create the styles folder in case there isnt one and store the path
 love.filesystem.createDirectory("styles/")
+local stylesFolder = love.filesystem.getSaveDirectory() .. "/styles/"
 love.filesystem.createDirectory("pools/")
+local poolsFolder = love.filesystem.getSaveDirectory() .. "/pools/"
 
 -- load the config variables from hconf.lua
 hconf = require "hconf"
@@ -223,7 +227,7 @@ function love.keypressed(key, scancode, isrepeat)
     -- when space is pressed, get a random flow from the current style, parse it and set the joke variable to the result
     if key == "space" and current_style then
         local flow = current_style.flows[math.random(#current_style.flows)]
-        local parsed_flow = flows.parseWords(flow, words)
+        local parsed_flow = flows.parse(flow, words)
         joke = parsed_flow
         print(joke)
     end

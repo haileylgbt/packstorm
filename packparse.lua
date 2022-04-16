@@ -14,8 +14,27 @@ local packparse = {
     -- it then returns a processed string with the words replaced
     -- t needs to be a string and include at least 1 replaceable word
     -- w needs to be a table of words that include a nouns, adjectives, and verbs table
-    parseWords = function(t, w)
+    -- stage 1: word tag replacement
+    -- a word tag is a word surrounded by square brackets
+    -- example: "[adjective]"
+    -- the parser will randomly pick a word from the adjectives table and replace the tag
+    -- example: "You look like a [adjective] [noun]." becomes "You look like a fruity banana."
+    -- stage 2: special tag replacement
+    -- a special tag is a word surrounded by curly brackets
+    -- example: "{a/n}"
+    -- the parser will replace the tag with something depending on the tag
+    -- examples:
+    -- "{a/n}" becomes "a" or "an" depending on the context
+    -- "{d10}" becomes a random number between 1 and 10
+    -- stage 3: grammar fixing
+    -- the parser will fix grammar errors in the flow
+    -- examples:
+    -- "I was runing away." becomes "I was running away."
+    -- "I maked a mess." becomes "I made a mess."
+    -- "She swimed away." becomes "She swam away."
+    parse = function(t, w)
         local r = t
+        -- stage 1
         local n = w.nouns
         local a = w.adjectives
         local v = w.verbs
@@ -28,24 +47,22 @@ local packparse = {
         r = string.gsub(r, "%[noun%]", n[rn])
         r = string.gsub(r, "%[adjective%]", a[ra])
         r = string.gsub(r, "%[verb%]", v[rv])
-        -- replace {nword} with "neighbour"
+        -- stage 2
+        -- {a/n} becomes "a" or "an" depending on the context
+        -- example: "{a/n} apple" becomes "an apple" whereas "{a/n} pineapple" becomes "a pineapple"
+        r = string.gsub(r, "%{a/n%}", function()
+            -- if the character 2 characters ahead (including space) from the closing curly bracket is a vowel, then return "an"
+            if string.sub(r, string.find(r, "%}") + 2, string.find(r, "%}") + 2) == "a" or string.sub(r, string.find(r, "%}") + 2, string.find(r, "%}") + 2) == "e" or string.sub(r, string.find(r, "%}") + 2, string.find(r, "%}") + 2) == "i" or string.sub(r, string.find(r, "%}") + 2, string.find(r, "%}") + 2) == "o" or string.sub(r, string.find(r, "%}") + 2, string.find(r, "%}") + 2) == "u" then
+                return "an"
+            else
+                return "a"
+            end
+        end)
         r = string.gsub(r, "%{nword%}", "nigga")
+        
         return r
     end
     
-
-    -- fixGrammar takes a string (t) as input
-    -- it then returns a processed string with corrected grammar
-    -- t needs to be a string
-    -- the function correct most common grammar errors that will most likely appear in a parsed flow
-    -- errors it covers:
-    --  - verb tenses: fixes the spelling of verbs in past or present tense
-    --      - "-eing" -> "-ing"
-    --      - "makeed" -> "made"
-    --      - "-ming" or "-ning" -> "-mming" or "-nning"
-    --      - "-med" or "ned" -> "-am"
-    --      - and so on
-    --  - more will be added as I find them
 
     
     
