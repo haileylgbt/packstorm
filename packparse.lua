@@ -9,6 +9,8 @@
 -- the parser also supports verb tenses.
 -- example: "I was [verb]ing away." becomes "I was running away."
 
+grammar = require "grammar"
+
 local packparse = {
     -- parseFlow takes a string (t) and a table of words (w) as input
     -- it then returns a processed string with the words replaced
@@ -60,6 +62,17 @@ local packparse = {
         end)
         r = string.gsub(r, "%{nword%}", "nigga")
         
+        -- stage 3
+        -- check if a word matches a string with an odd index from the grammar table.
+        -- if it is, replace it with the string next in the table
+        -- if a word matches a string with an even index from the grammar table, then do nothing
+
+        -- check for odd index
+        for i = 1, #grammar, 2 do
+            if string.find(r, grammar[i]) then
+                r = string.gsub(r, grammar[i], grammar[i + 1])
+            end
+        end
         return r
     end
     
